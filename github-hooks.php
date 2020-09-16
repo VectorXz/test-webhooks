@@ -6,9 +6,14 @@ if(!isset($_POST["payload"])) {
     fclose($myfile);
 } else {
     $postBody = $_POST['payload'];
-    $payload = json_decode($postBody);
+    $payload = json_decode($postBody, true);
     $myfile = fopen("testfile.txt", "w");
-    fwrite($myfile, $postBody);
+    fwrite($myfile, $payload["repository"]["full_name"]);
+    fwrite($myfile, $payload["commits"][0]["id"]);
     fclose($myfile);
+    $file = fopen("testfile.txt","r");
+    $contents = fread($file,filesize("testfile.txt"));
+    fclose($file);
+    echo $contents;
 }
 ?>
