@@ -5,7 +5,7 @@ if(!isset($_POST["payload"])) {
     $postBody = $_POST['payload'];
     $payload = json_decode($postBody);
     $myfile = fopen("testfile.txt", "w");
-    fwrite($myfile, $payload);
+    fwrite($myfile, $postBody);
     fclose($myfile);
 }
 ?>
